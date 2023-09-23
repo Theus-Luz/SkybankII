@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleinterface.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+
+
+   
+    <title>Skybank</title>
+</head>
+<body>
+    <div id = "txt1"> </div>
+    <div class="div1">
+    <div class="menu1">
+
+     
+        <nav><ul class="menu">
+<div class="menu2"><p id="username"></p>Olá Ellon Musk, Seja Bem vindo!</div>
+    <li class="menu2" id = "menuinicio"><a href="#"><img src="/imagens/icones/inicio.png" alt="" class="imgmenu">      Inicio</a> </li>
+    <li class="menu2" id = "menumov"><a href="#"><img src="/imagens/icones/Transf menu.png" alt="" class="imgmenu">      Movimentações</a></li>
+    <li class="menu2" id = "menusup" ><a href="#"><img src="/imagens/icones/sup.png" alt="" class="imgmenu">     Suporte </a></li> 
+
+    </ul>
+    </nav>
+</div></div>
+<div class = tarja>
+<img id="logo" src="/imagens/logo.png" alt="">
+
+
+</div>
+
+    <div class="interFace">
+        <p id="saldotxt">Saldo em conta </p>
+
+        <p id = "sifraosaldo" >R$</p>  <span id="saldoconta">1000</span>
+        
+        
+    
+
+
+    
+ 
+</div>
+    <div class="botoes">
+    <input type="button" value="Pix" class="btninter" id="pix">
+    <input type="button" value="Deposito" class="btninter" id="dep">
+    <input type="button" value="Saque" class="btninter" id="saq">
+    <input type="button" value="Transferencia" class="btninter" id="transf">
+    <input type="button" value="Pagamento" class="btninter" id="pag">
+   
+
+</div>
+
+</div>
+<div class="mov"> 
+ <p id="mov1"> </p>   
+</div>
+
+
+<div class="pixtransf" >
+    <div class="pix2">
+<br><p id="txtpix"> Para quem você deseja transferir? </p>
+<p id="esccampo" class="txtpix1" > Escolha a chave: </p>
+</div>
+    <form method="post" action="cadastrar-enquete.php">
+    <select name="pixchave" class = "btnspix" id="selecao" onchange="mostrarCaixaTexto()">
+    <option value="email">E-mail</option class = "btnspix" id = "chaveemail">
+    <option value="cel">Celular</option class = "btnspix" id = "chavecel">
+    <option value="cpf1">CPF</option class = "btnspix" id = "chavecpf">
+    <option value="cnpj">CNPJ</option class = "btnspix" id = "chavecnpj" >
+    <option value="chave1">Chave Aleatória</option class = "btnspix">
+    </select>
+
+ 
+   <p class = "txtpix1">Digite a Chave Selecionada: </p>
+   <input type="email" value="" id = "entraemail" placeholder="Chave de E-mail: " class = "btnspix">
+   <input type="number" value="" id = "entracelular" placeholder="Chave de Celular: " class = "btnspix">
+   <input type="number" value="" id = "entraentracpf" placeholder="Chave de CPF: " class = "btnspix">
+   <input type="number" value="" id = "entraentracnpj" placeholder="Chave de CNPJ: " class = "btnspix">
+
+
+
+
+
+   <div id="errochave" class = "errospix"></div>
+ 
+    <p class = "txtpix1">Digite o valor:</p>
+    <input type="text" value="" id = "entrapix" placeholder="R$" class = "btnspix">
+  
+    <input type="button" value="Transferir" id="botaotransf" class = "btnspix" />
+    <div id="entrenumero" class = "errospix">
+ 
+ 
+        
+    </div>
+ 
+
+
+
+
+</div>
+
+    <!-- DEPOSITO -->
+<div class="deposit">
+
+    <p class="btnsdep">Digite o Valor que deseja Depositar em sua conta: </p>
+    <input type="number" nome = R$ id="dep1" placeholder="Código do Boleto: " class="btnsdep">
+    <label for="deposito1">R$</label>
+    <input type="button" value="Prosseguir" id="boletogerado"  class="btnsdep">
+    <div id = "salvaboleto" class="btnsdep"></div>
+    
+    
+</div>
+
+<!-- SAQUE -->
+
+
+
+
+
+
+
+
+
+<div class="areatransf">
+<p class="transfbtn" class="errosted"> Para quem Você deseja Transferir ? </p>
+<input type="text" value="" id="caixaNome" placeholder="Nome:" class="transfbtn">
+<div id="nometed" class="errosted"></div>
+<br>
+<input type="number" name="" id="caixaCpf" placeholder="CPF:"" class="transfbtn">
+<div id="cpfted" class="errosted"></div>
+<br>
+<input type="number" name="" id="caixaAgencia" placeholder="Agência:" class="transfbtn">
+<div id="agenciated" class="errosted"></div>
+<br>
+<input type="number" name="" id="caixaConta" placeholder="Conta:" class="transfbtn">
+<div id="contated" class="errosted"></div>
+<br>
+<input type="number" name="" id="caixaValor" placeholder="R$" class="transfbtn">
+<div id="valorted" class="errosted"></div>
+<input type="button" value="Transferir" id="btnted" class="transfbtn">
+</div>
+
+
+<div class="areapag">
+    <p class="colunaspag" >Realize aqui seu pagamento:</p>
+    <form id="form-pagamento" class="colunaspag">
+      <label for="codigo" class="colunaspag">Código de barras:</label>
+      <input type="text" id="codigo" name="codigo" class="colunaspag"><br><br>
+      <button type="button" id="gerar" class="colunaspag">Colar Código do Boleto</button>
+      <br><br>
+      <button type="button" id="pagar" class="colunaspag">Pagar</button>
+    </form>
+
+</div>
+
+</div>
+
+<div class="suporte">
+    <p class="suportstyle"> Você esta na Central de Atendimento!</p> 
+    <p class="suportstyle">Há dúvidas ?  <a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html">Veja nossa FAQ</a>.</p>
+
+    <p class="suportstyle">Ainda precisa de ajuda? Fale conosco: </p>
+    <input type="text" name="" id="btnfaleconosco" placeholder="Entre com sua Dúvida aqui: " class="suportstyle">
+    <input type="button" value="Enviar" class="suportstyle" id="enviaduvida">
+    
+    <p class="suportstyle">Se preferir, Entre em contato com a gente - Telefone: 2555-3011</p> 
+
+</div> 
+
+
+<!-- SAQUE -->
+<div id ="btnssaq">
+    <p class="saquetxt" >Realize seu Saque</p>
+    <p class = "txtpix1">Digite o valor:</p>
+    <input type="text" value="" id = "saqueInput" placeholder="R$" >
+    <button id="saqueButton">Realizar Saque</button>
+
+</div>
+<div class="movimentos">
+    <ul id="lista-transferencias">
+    
+    
+        <div class="transferencia" id="transf1">
+        <pre class="txtmov">  Transferência Pix enviada                                                                                        11/05          -R$200</pre></div>
+        <div class="transferencia" id="transf2">
+        <pre class="txtmov">  Transferência Pix enviada                                                                                        05/05          -R$450</pre></div>
+        <div class="transferencia" id="transf3" >
+        <pre class="txtmov">  Transferência Pix enviada                                                                                        10/04          -R$1100</pre></div>
+      </ul>
+      
+    
+      <div class="popup-wrapper">
+        <div class="popup">
+            <div class="popup-close">x</div>
+            <div class="popup-content">
+                <h2>Comprovante de Transferência</h2>
+                <h2>Destinatario:</h2>
+                <p class="movDados">Nome:Julio </p>
+                <p class="movDados">Data:11/05/2023 </p>
+                <p class="movDados">Instituição:Banco Santander</p>
+            
+                <h2>Origem</h2>
+                <p class="movDados">Usuario</p>
+                <p class="movDados">CPF: ***.037.968-**</p>
+                <p class="movDados">Instituição: Skybank</p>
+                <div id="valormov">Valor Transferido: -R$200</div>
+                  
+            </div>
+        </div>
+      </div>
+
+    
+      <div class="popup-wrapper2">
+        <div class="popup">
+            <div class="popup-close">x</div>
+            <div class="popup-content">
+                <h2>Comprovante de Transferência</h2>
+                <h2>Destinatario:</h2>
+                <p class="movDados">Nome:Guilherme </p>
+                <p class="movDados">Data:05/05/2023 </p>
+                <p class="movDados">Instituição: PicPay</p>
+            
+                <h2>Origem</h2>
+                <p class="movDados">Usuario</p>
+                <p class="movDados">CPF: ***.037.968-**</p>
+                <p class="movDados">Instituição: Skybank</p>
+                <div id="valormov">Valor: -R$450</div>
+                
+            </div>
+        </div>
+      </div>
+
+    
+      <div class="popup-wrapper3">
+        <div class="popup">
+            <div class="popup-close">x</div>
+            <div class="popup-content">
+                <h2>Comprovante de transferência</h2>
+                <h2>Destinatario:</h2>
+                <p class="movDados">Nome:Camila</p>
+                <p class="movDados">Data:10/04/2023 </p>
+                <p class="movDados">Instituição: Banco Ítau</p>
+            
+                <h2>Origem</h2>
+                <p class="movDados">Usuario</p>
+                <p class="movDados">CPF: ***.037.968-**</p>
+                <p class="movDados">Instituição: Skybank</p>
+                <div id="valormov">Valor Transferido: -R$1100</div>
+                
+                
+            </div>
+
+            
+        </div>
+        
+      </div>
+
+
+
+
+
+
+
+      <!-- <div id="detalhes-transferencia">
+
+        <p id="descricao-transferencia"></p>
+        <p id="valor-transferencia"></p>
+        <p id="remetente-transferencia"></p>
+        <p id="destinatario-transferencia"></p>
+        <p id="data-transferencia"></p>
+        <p id="conta-origem"></p>
+        <p id="conta-destino"></p> -->
+      </div>
+          
+</div>
+<!-- <div class="perfil">
+    <p>Seus Dados </p>
+    <p>Nome: </p>
+    <p>E-mail: </p>
+    <p>Cpf: </p>
+    <p>Endereço: </p>
+    <p>Chaves cadastradas: </p>
+</div> -->
+
+
+<script src="/Interface/Javascript/deposito.js" defer></script>
+<script src="/Interface/Javascript/menu.js" defer></script>
+<script src="/Interface/Javascript/pagamento.js" defer></script>
+<script src="/Interface/Javascript/pix.js" defer></script>
+<script src="/Interface/Javascript/saque.js" defer></script>
+<script src="/Interface/Javascript/suporte.js" defer></script>
+<script src="/Interface/Javascript/transferencia.js" defer></script>
+<script src="/Interface/Javascript/movimentos.js" defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+
+</body>
+</html>

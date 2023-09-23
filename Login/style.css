@@ -1,0 +1,110 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(70, 200, 252);
+    
+}
+form{
+    width: 100%;
+    max-width: 350px;
+}
+#img1{
+    width: 200px;
+    margin: auto;
+    display: block;
+    text-align: center;
+
+    
+}
+.input-campos{
+    width: 100%;
+    margin: 30px 0;
+    position: relative;
+}
+.input-campos label{
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    color: rgb(150, 150, 150);
+    cursor: text;
+    transition: 0.5s ease-in-out;
+
+}
+div.input-campos .input{
+    width: 100%;
+    padding: 5px;
+    color: rgb(150, 150, 150);
+    border: 0;
+    border-bottom: 2px solid rgb(200, 200, 200);
+    outline: 0;
+    font-size: 16px;
+}
+div.input-campos .input:focus,
+div.input-campos .input:valid{
+    border-bottom: 2px solid cornflowerblue;
+}
+div.input-campos .input:focus ~label,
+div.input-campos .input:valid ~label{
+    transform: translateY(-24px);
+    font-size: 12px;
+    color: cornflowerblue;
+}
+
+
+#entrar {
+
+    border-radius: 30px;
+    width: 33%;
+    padding: 5px;
+    height: 20px;
+    left: 50%;
+    top: 50%;
+    float: right;
+
+    
+    color: #fff;
+    background-color: rgb(70, 200, 252);
+    border: none;
+    height: 35px;
+    line-height: 13px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+#entrar{
+    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    
+}
+#entrar:hover{
+    transform: scale(1.05);
+}
+.p1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#cliqueaqui{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #fff;
+    border: 0;
+    cursor: pointer;
+   cursor: hand;
+}
+.contener{
+
+    border: 1px solid rgb(150, 150, 150);
+    width: 20%;
+    padding: 20px;
+    background-color: white;
+
+}
