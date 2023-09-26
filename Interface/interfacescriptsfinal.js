@@ -4,6 +4,7 @@
 
 var btndiv = document.getElementById('btn-div');
 var versaldo = document.querySelector('.saldo');
+
 //saque
 
 //pix
@@ -30,4 +31,3 @@ btndiv.addEventListener('click', function() {
     versaldo.style.display = 'block';
   }
 });
-

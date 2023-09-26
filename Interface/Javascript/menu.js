@@ -40,7 +40,7 @@ pixtransf.style.display = 'none',
       btnssaq.style.display = 'none';
 
 });
-btnCadastro.addEventListener('click', funcCadastro);
+// btnCadastro.addEventListener('click', funcCadastro);
 
 
 

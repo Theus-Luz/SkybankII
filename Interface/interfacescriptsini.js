@@ -3,6 +3,20 @@ const numeroAleatorio = Math.floor(Math.random() * 333333333333333330);
 
 var saldoElement = document.getElementById("saldoconta");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Verifique se o elemento foi encontrado
 if (saldoElement) {
   // Obtenha o texto dentro do elemento e remova espaços em branco extras

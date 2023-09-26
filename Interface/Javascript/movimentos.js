@@ -108,7 +108,7 @@ popup3.addEventListener('click', event => {
 
 
 
-menusuporte.addEventListener('click', menuSup);
+// menusuporte.addEventListener('click', menuSup);
 
 
 
