@@ -15,6 +15,7 @@ btndep.addEventListener('click', function areaDep () {
       suporte.style.display = 'none';
       movimentos.style.display = 'none';
       perfil.style.display = 'none';
+      btnssaq.style.display = 'none';
   } else {
       deposit.style.display = 'block';
       pixtransf.style.display = 'none';
@@ -23,6 +24,7 @@ btndep.addEventListener('click', function areaDep () {
       suporte.style.display = 'none';
       movimentos.style.display = 'none';
       perfil.style.display = 'none';
+      btnssaq.style.display = 'none';
   }
 });
 btnboleto.addEventListener('click', boletoPronto);
