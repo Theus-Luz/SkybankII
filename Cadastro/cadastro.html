@@ -6,56 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skybank - Página cadastral</title>
 
-<link rel="stylesheet" href="/cadastro/stylecadastro.css">
+    <link rel="stylesheet" type="text/css" href="/stylecadastro.css">
 <script src="/cadastro/cadastroini.js"></script>
 </head>
 <body>
     <div class="contener">
+        <form id="cadastroForm">
     <h1> </h1>
 <img src="/imagens/Skybank.png" alt="" id="img1">
 <p id="txt1">Você seguro com a gente.</p>
 
 <br>
 <div class="campos1">
-<input type="Text" value="" class = "caixa1" id="nome" required>
-<label for="nome">Nome</label>
-<br>
-<br>
-<br>
-<input type="Text" value="" class = "caixa1" id = "sobrenome" required>
-<label for="nome">Sobrenome</label>
-<br>
-<br>
-<br>
-<input type="number" value="" class = "caixa1" id = "cpf" required>
-<label for="cpf">CPF</label>
-<br>
-<br>
-<br>   
-<input type="Text" value="" class = "caixa1" id="email" required>
-<label for="email">E-mail</label>
-<br>
-<br>
-<br> 
-<input type="Text" value="" class = "caixa1" id="endereco" required>
-<label for="endereco">Endereço</label>
-<br>
-<br>
-<br>
-<input type="Text" value="" class = "caixa1" id="cidade">
-<label for="cidade">Cidade</label>
-<br>
-<br>
-<br>
-<input type="password" value="" class = "caixa1" id="senha" required >   
-<label for="senha">Senha</label> 
-<br>
-<br>
-<br>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" class = "caixa1" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" class = "caixa1" required><br><br>
+
+
+    <label for="cpf">CPF:</label>
+<input type="text" id="cpf" name="cpf" class="caixa1" pattern="[0-9]{11}" maxlength="11" required><br><br>
+
+<label for="senha">Senha:</label>
+<input type="text" id="senha" name="senha" class="caixa1" maxlength="8" required><br><br>
+
+
+
+
+
+
 </div>
-<a href="http://127.0.0.1:5503/Login/login.html"><input type="button" value="Cadastre-se" id="entrar"></a>
+<a href="http://127.0.0.1:5503/Login/login.html"><input type="submit" value="Cadastre-se" id="entrar"></a>
+</form>
 </div></div>
 
 <script src="/Cadastro/cadastrofinal.js"></script>
 </body>
+
+<script>
+    const cadastroForm = document.getElementById('cadastroForm');
+  
+    cadastroForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const cpf = document.getElementById('cpf').value;
+      const senha = document.getElementById('senha').value;
+
+      
+  
+      try {
+        const response = await fetch('/cadastrar-usuario', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nome, email, cpf, senha })
+        });
+  
+        if (response.ok) {
+          console.log('Usuário cadastrado com sucesso!');
+          alert('Usuário cadastrado com sucesso!');
+        } else {
+          console.error('Erro ao cadastrar usuário.');
+          alert('Erro ao cadastrar usuário.');
+        }
+      } catch (error) {
+        console.error('Erro na solicitação:', error);
+        alert('Erro na solicitação.');
+      }
+    });
+
+  </script>
 </html>

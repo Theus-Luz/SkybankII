@@ -59,17 +59,34 @@ if (conta.length > 4) {caixaConta.value = conta.substring(0, 4);}// Limita a Con
 
 
 btnted.addEventListener('click', function(){
+
+  var saldocontaElement = document.getElementById('saldoconta');
+  var saldoconta = parseFloat(saldocontaElement.innerText);
+  valordatransferencia = caixaValor.value;
+
   if(caixaNome.value == '') {nometed.innerHTML = "Entre com um Nome!"}
   if(caixaCpf.value == '') {cpfted.innerHTML = "Entre com um CPF!"}
   if(caixaAgencia.value == ''){agenciated.innerHTML = "Entre com uma agencia"}
   if(caixaConta.value == ''){contated.innerHTML = "Entre com uma Conta"}
   if(caixaValor.value == ''){valorted.innerHTML = "Entre com um Valor!"}
-  else if(caixaNome.value != '' && caixaCpf.value != '' && caixaAgencia != '' && caixaConta != '' && caixaValor != '')
-  {nometed.innerHTML = '',
-  cpfted.innerHTML = '',
-  agenciated.innerHTML = '',
-  contated.innerHTML = '',
-  valorted.innerHTML = '',
+  
+  
+  
+   if(caixaNome.value != '' && caixaCpf.value != '' && caixaAgencia != '' && caixaConta != '' && caixaValor != ''){
+    
+    nometed.innerHTML = '',
+   cpfted.innerHTML = '',
+   agenciated.innerHTML = '',
+   contated.innerHTML = '',
+   valorted.innerHTML = '',
+  
+  
+  
+  (saldoconta)
+  
+  
+    if(saldoconta > 0 && valordatransferencia <= saldoconta) {
+
     Swal.fire({
     title: 'Confirme sua Transferência',
     text: "Você esta preste a finalizar sua Transferência, Confirme se os dados estão corretos!",
@@ -78,24 +95,38 @@ btnted.addEventListener('click', function(){
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Transferir'
-  }).then((result) => {
+ }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Obrigado por Usar nosso Banco!',
-        'Sua Transferência foi realizada com sucesso!',
-        'success'
-      )
-     
-      var saldocontaElement = document.getElementById('saldoconta');
-      var saldoconta = parseFloat(saldocontaElement.innerText);
-      valordatransferencia = caixaValor.value;
+
       saldoconta -= parseFloat(valordatransferencia);
       saldocontaElement.innerText = saldoconta.toFixed(2);
-     
-    }
-  })}
-  });
 
+      Swal.fire(
+       
+
+        'Obrigado por Usar nosso Banco!',
+        'Sua Transferência foi realizada com sucesso!',
+        'success' )}})
+
+    
+      } else {
+          Swal.fire({
+            icon: 'error',
+           title: 'Oops...',
+            text: 'Você não tem saldo para realizar a transferência!',
+            footer: '<a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html"> Esta com dificuldade para Sacar? Acesse nossa Faq</a>'
+          })}
+
+    
+        }});
+
+  
+
+
+  
+
+
+  
 
 // entrapix.value > 1 && entrachave.value > 1
 

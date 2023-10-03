@@ -19,6 +19,7 @@ function addResponseMessage(message) {
 }
 
 // Função para processar a entrada do usuário e gerar respostas
+// Função para processar a entrada do usuário
 function processUserInput() {
     const userText = userInput.value.toLowerCase(); // Converte a entrada do usuário para minúsculas
     addUserMessage(userText);
@@ -34,7 +35,7 @@ function processUserInput() {
             break;
 
         case 'deposito':
-            addResponseMessage('Acesse a página inicial do SkyBank e procure por "Deposito", lá você terá como depositar a quantia desejada.');
+            addResponseMessage('Acesse a página inicial do SkyBank e procure por "Depósito", lá você terá como depositar a quantia desejada.');
             break;
 
         case 'sac':
@@ -42,7 +43,7 @@ function processUserInput() {
             break;
 
         default:
-            addResponseMessage('Para mais informações entre em contato com a nossa central de atendimento: 0800 2525-1212');
+            addResponseMessage('Digite uma das Opções, ou acesse a nossa FAQ de ajuda!');
             break;
     }
 
@@ -50,33 +51,15 @@ function processUserInput() {
     userInput.value = '';
 }
 
-// Event listener para o botão de envio
+
 sendButton.addEventListener('click', function (e) {
     e.preventDefault();
     processUserInput();
 });
 
-// Event listener para a tecla Enter
-document.getElementById('meuFormulario').addEventListener('submit', function(event) {
-    // Impedir o comportamento padrão de envio do formulário
-    event.preventDefault();
-    // Chame a função para enviar o formulário
-    enviarFormulario();
-    document.getElementById('campoDeTexto').addEventListener('keydown', function(event) {
-        // Verifique se a tecla pressionada é a tecla "Enter"
-        if (event.key === 'Enter') {
-            // Impedir o comportamento padrão de atualização da página
-            event.preventDefault();
-            // Chame a função para enviar o formulário
-            enviarFormulario();
-        }
-    });
 
-    
-    document.getElementById('meuFormulario').addEventListener('submit', function(event) {
-        
-        event.preventDefault();
-        
-        enviarFormulario();
-    });
+document.getElementById('meuFormulario').addEventListener('submit', function(event) {
+    event.preventDefault();
+    processUserInput();
 });
+
