@@ -88,13 +88,13 @@ btnted.addEventListener('click', function(){
     if(saldoconta > 0 && valordatransferencia <= saldoconta) {
 
     Swal.fire({
-    title: 'Confirme sua Transferência',
-    text: "Você esta preste a finalizar sua Transferência, Confirme se os dados estão corretos!",
+    title: 'Você esta preste a finalizar sua Transferência',
+    text: "Se os dados estiverem corretos, clique em Prosseguir, para Prosseguir com sua Transferência!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Transferir'
+    confirmButtonText: 'Prosseguir'
  }).then((result) => {
     if (result.isConfirmed) {
 
