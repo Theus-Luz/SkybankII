@@ -27,7 +27,7 @@
 
      
         <nav><ul class="menu">
-<div class="menu2"><p id="username"></p>Olá Ellon Musk, Seja Bem vindo!</div>
+<div class="menu2"><p id = "nomedeuser">Nome do Usuário</p></div>
     <li class="menu2" id = "menuinicio"><a href="#"><img src="/imagens/icones/inicio.png" alt="" class="imgmenu">      Inicio</a> </li>
     <li class="menu2" id = "menumov"><a href="#"><img src="/imagens/icones/Transf menu.png" alt="" class="imgmenu">      Movimentações</a></li>
     <li class="menu2" id = "menusup" ><a href="#"><img src="/imagens/icones/sup.png" alt="" class="imgmenu">     Suporte </a></li> 
@@ -435,7 +435,20 @@ botaoTransferir.addEventListener('click', async () => {
 
 
     
-  
+window.addEventListener('load', () => {
+  const email = 'Kylers@skybank'; // Substitua pelo e-mail que deseja buscar
+
+  fetch(`/buscar-nomesocial/${email}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const nomedeuser = document.getElementById('nomedeuser');
+      nomedeuser.textContent = "Olá " + data.nomesocial +", Seja Bem vindo!";
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar nome social:', error);
+    });
+});
+
 
 
 </script>

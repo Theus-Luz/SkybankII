@@ -39,6 +39,7 @@ async function criarTabelaUsuarios() {
         idcadastro INT AUTO_INCREMENT PRIMARY KEY,
         saldo INT,
         nome VARCHAR(45),
+        nomesocial VARCHAR(45),
         email VARCHAR(45),
         cpf VARCHAR(45),
         senha VARCHAR(45),
@@ -56,15 +57,15 @@ async function criarTabelaUsuarios() {
 }
 // Rota para inserir um novo usuário
 app.post('/inserir-usuario', async (req, res) => {
-  const { nome, email, cpf, senha } = req.body;
+  const { nome,nomesocial, email, cpf, senha } = req.body;
   
-  console.log('Dados recebidos:', nome, email, cpf, senha);
+  console.log('Dados recebidos:', nome,nomesocial, email, cpf, senha);
 
   try {
     const connection = await mysql.createConnection(dbConfig);
     const [rows, fields] = await connection.execute(
-      'INSERT INTO usuarios (nome, email, cpf, senha) VALUES (?, ?, ?, ?)',
-      [nome, email, cpf, senha]
+      'INSERT INTO usuarios (nome,nomesocial, email, cpf, senha) VALUES (?, ?, ?, ?, ?)',
+      [nome,nomesocial, email, cpf, senha]
     );
     
     await connection.end();
@@ -186,3 +187,27 @@ app.post('/verificar-email', async (req, res) => {
     res.status(500).send('Erro ao verificar o e-mail de destino.');
   }
 });
+
+
+app.get('/buscar-nomesocial/:email', async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const connection = await mysql.createConnection(dbConfig); // Certifique-se de que 'dbConfig' está definido corretamente
+
+    const [results] = await connection.execute('SELECT nomesocial FROM usuarios WHERE email = ?', [email]);
+
+    if (results.length > 0) {
+      const nomesocial = results[0].nomesocial;
+      res.json({ nomesocial });
+    } else {
+      res.status(404).json({ error: 'E-mail não encontrado' });
+    }
+
+    connection.end();
+  } catch (error) {
+    console.error('Erro ao buscar nome social:', error);
+    res.status(500).json({ error: 'Erro ao buscar nome social' });
+  }
+});
+
