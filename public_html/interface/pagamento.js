@@ -11,6 +11,7 @@ btnpag.addEventListener('click', function areaPagamento () {
         suporte.style.display = 'none';
         movimentos.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
     } else {
         areapag.style.display = 'block';
         pixtransf.style.display = 'none';
@@ -19,6 +20,7 @@ btnpag.addEventListener('click', function areaPagamento () {
         suporte.style.display = 'none';
         movimentos.style.display = 'none';    
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
     }
 }
 );

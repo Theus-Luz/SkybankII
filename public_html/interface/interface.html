@@ -26,10 +26,16 @@
     <div class="menu1">
 
      
+
+  
+
+
         <nav><ul class="menu">
+        
 <div class="menu2"><p id = "nomedeuser">Nome do Usuário</p></div>
     <li class="menu2" id = "menuinicio"><a href="#"><img src="/imagens/icones/inicio.png" alt="" class="imgmenu">      Inicio</a> </li>
     <li class="menu2" id = "menumov"><a href="#"><img src="/imagens/icones/Transf menu.png" alt="" class="imgmenu">      Movimentações</a></li>
+    <li class="menu2" id = "menuperfil"><a href="#"><img src="/imagens/icones/Transf menu.png" alt="" class="imgmenu">      Perfil</a></li>
     <li class="menu2" id = "menusup" ><a href="#"><img src="/imagens/icones/sup.png" alt="" class="imgmenu">     Suporte </a></li> 
 
     </ul>
@@ -64,6 +70,17 @@
 </div>
 
 </div>
+
+<div class="perfiluser" id="perfiluser">
+  <p class="txtperfil">Bem-vindo ao seu Perfil</p>
+  <p class="perfilInfo">Suas informações:</p>
+  <p class="perfilInfo">Cadastre sua Chave Pix!</p>
+  <input type="text" name="cadastraNovaChave" id="cadastraNovaChave" class="btnsperfil">
+  <input type="button" value="OK" id="cadastrarPixButton" class="btnsperfil">
+</div>
+
+
+
 <div class="mov"> 
  <p id="mov1"> </p>   
 </div>
@@ -72,14 +89,11 @@
   <div class="pix2">
     <br>
     <p id="txtpix">Para quem você deseja transferir?</p>
-    <p id="esccampo" class="txtpix1">Escolha a chave:</p>
   </div>
-  <select name="pixchave" class="btnspix" id="selecao">
-    <option value="email">E-mail</option>
-  </select>
 
-  <p class="txtpix1">Digite a chave do destinatário:</p>
-  <input type="text" id="entraemail" placeholder="E-mail, CPF ou outra chave PIX" class="btnspix">
+
+  <p class="txtpix1">Digite a chave PIX do destinatário:</p>
+  <input type="text" id="entraemail" placeholder="Chave PIX do destinatário" class="btnspix">
 
   <div id="errochave" class="errospix"></div>
 
@@ -102,33 +116,104 @@
     <!-- DEPOSITO -->
     <div class="deposit">
 
-        <p class = "txtdep">Realize sua Adição de Dinheiro: </p>
-        <label for="deposito1"></label>
-        <!-- <input type="number" nome = R$ id="dep1" placeholder="Valor Desejado " class="btnsdep"> -->
+      <p class = "txtdep">Confira os valores de Depósito logo abaixo: </p>
+      <label for="deposito1"></label>
+      <!-- <input type="number" nome = R$ id="dep1" placeholder="Valor Desejado " class="btnsdep"> -->
 
+      <div class="vdef">
+        <div class="valor200">
+      <input type="button" onclick="bol50()" value="R$ 50,00" class="btndepo" id="btn50">
+      <input type="button" onclick="bol100()" value="R$ 100,00" class="btndepo" id="btn100">
+      <input type="button" onclick="bol200()" value="R$ 200,00" class="btndepo" id="btn200">
+        </div>
+      <br>
+        <div class="valor1000">
+      <input type="button" onclick="bol300()" value="R$ 300,00" class="btndepo" id="btn300">
+      <input type="button" onclick="bol500()" value="R$ 500,00" class="btndepo" id="btn500">
+      <input type="button" onclick="bol1000()" value="R$ 1.000,00" class="btndepo" id="btn1000">
+        </div>
+      </div>
 
-
-        <form method="post" action="/realizar-deposito">
-            <p class="txtdep1">Digite o valor:</p>
-            <input type="number" value="" id="dep1" placeholder="R$" class="btnsdep">
-            <button type="submit" id="boletogerado" class="btnsdep">Confirmar Depósito</button>
-          </form>
-          
-          
-          
-    
-        <div id="errodep"></div>
-    
-        <!-- <label for="deposito1">R$</label> -->
-    
-        <input type="button" value="Confirmar" id="boletogerado"  class="btnsdep">
-    
-        <div id = "salvaboleto" class="btnsdep"></div>
+      <style>
+        .btndepo{
+          width: 105px;
+          padding: 10px;
+          border-radius: 10px;
+          margin-left: 4%;
+          margin-bottom: 20px;
+        }
+        .vdef{
+          padding-left: 50px;
+        }
+        .valor200{
+          padding-right: 50px;
+        }
+        .valor100{
+          padding-right: 50px;
+        }
+      </style>
+       <!-- <form method="post" action="/realizar-deposito">
+          <p class="txtdep1">Digite o valor:</p>
+          <input type="number" value="" id="dep1" placeholder="R$" class="btnsdep">
+          <button type="submit" id="boletogerado" class="btnsdep">Confirmar Depósito</button>
+        </form>  -->
         
+        
+        
+  
+      <div id="errodep"></div>
+  
+      <!-- <label for="deposito1">R$</label> -->
+  
+      <!-- <input type="button" value="Confirmar" id="boletogerado"  class="btnsdep"> -->
+  
+      <div id = "salvaboleto" class="btnsdep"></div>
+      
+      
+  </div>
+
+
+  <!-- ----------------- CHATBOX DO SKYBANK ----------------- -->
+
+  <button class="float-buttonc"><p id="qchat">?</p></button>
+
+  <div class="modalchat">
+      <div class="modalchat-contentc">
+          <span class="close-buttonc">×</span>
+
+          <div class="containerchat">
+          <div class="headerchat">
+            <h1>SkyBank</h1>
+        </div>
+
+        <div class="bodychat">
+            <div class="message"><img id = "imgassist" src="/imagens/assistente1.png"  alt=""> <p id = "msgassist">Olá, sou a Violeta, assistente virtual do Skybank! Como posso ajudar?</p></div>
+         <li>1 - Pix</li>
+            <br>
+            <li>2 - Chaves Pix</li>
+            <br>
+            <li>3 - Transferência</li>
+            <br>
+            <li>4 - Depósito</li>
+            <br>
+            <li>5 - Saque</li>
+            <br>
+            <li>6 - Faq de ajuda</li>
+            <br>
+           
+        </div>
+        <div class="footerchat">
+            <form>
+                <input type="text" id="userInput" placeholder="Digite sua mensagem...">
+                <button id="sendButton">Enviar</button>
+            </form>
+        </div>
+      
         
     </div>
-
-
+   <a class="volte" href="http://127.0.0.1:5503/Interface/interface.html">Clique aqui e volta ao Skybank!</a>
+      </div>
+  </div>
 
 
 
@@ -306,7 +391,9 @@
 
 
 
+
 </div>
+<script src="/interface/perfil.js"></script>
 <script src="/interface/saldoatt.js"></script>
 <script src="/interface/deposito.js" defer></script>
 <script src="/interface/menu.js" defer></script>
@@ -316,6 +403,7 @@
 <script src="/interface/suporte.js" defer></script>
 <script src="/interface/transferencia.js" defer></script>
 <script src="/interface/movimentos.js" defer></script>
+<script src="/interface/chatscript.js"></script>
 <script src="/public_html/interface/interfacescriptsfinal.js" defer></script>
 
 
@@ -354,12 +442,12 @@
 // Adicione um evento de clique ao botão "Transferir"
 const botaoTransferir = document.getElementById('botaotransf');
 botaoTransferir.addEventListener('click', async () => {
-  const emailDestino = document.getElementById('entraemail').value;
-  const valorTransferencia = parseInt(document.getElementById('entrapix').value);
-  const emailOrigem = 'Kylers@skybank'; // Substitua pelo email do usuário logado
+  const chavePixDestino = document.getElementById('entraemail').value;
+  const valorTransferencia = parseFloat(document.getElementById('entrapix').value);
+  const emailOrigem = 'Kylers@skybank'; // AQUI É O E-MAIL DO USUARIO DE ORIGEM!!!!!!!!!
   const saldoConta = parseFloat(document.getElementById('saldoconta').textContent);
 
-  if (!emailDestino || isNaN(valorTransferencia) || valorTransferencia <= 0) {
+  if (!chavePixDestino || isNaN(valorTransferencia) || valorTransferencia <= 0) {
     document.getElementById('errochave').textContent = 'Preencha os campos corretamente';
   } else if (valorTransferencia > saldoConta) {
     // Exibir um SweetAlert informando que o saldo é insuficiente
@@ -367,22 +455,22 @@ botaoTransferir.addEventListener('click', async () => {
       icon: 'error',
       title: 'Oops...',
       text: 'Você não tem saldo para realizar essa Transferência',
-      footer: '<a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html"> Esta com dificuldade para Sacar? Acesse nossa Faq</a>'
+      footer: '<a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html">Está com dificuldade para Sacar? Acesse nossa Faq</a>'
     });
   } else {
-    // Verificar se o e-mail de destino existe
-    const response = await fetch('/verificar-email', {
+    // Verificar se a chave PIX de destino existe
+    const response = await fetch('/verificar-chavepix', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        emailDestino: emailDestino,
+        chavePixDestino: chavePixDestino,
       }),
     });
 
     if (response.status === 200) {
-      // O e-mail de destino existe, continue com a transferência
+      // A chave PIX de destino existe, continue com a transferência
 
       Swal.fire({
         title: 'Você está prestes a finalizar sua Transferência',
@@ -402,7 +490,7 @@ botaoTransferir.addEventListener('click', async () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              emailDestino: emailDestino,
+              chavePixDestino: chavePixDestino,
               valorTransferencia: valorTransferencia,
               emailOrigem: emailOrigem,
             }),
@@ -426,9 +514,9 @@ botaoTransferir.addEventListener('click', async () => {
         }
       });
     } else {
-      // O e-mail de destino não existe, mostre uma mensagem de erro usando o SweetAlert
-      Swal.fire('Chave não localizada', 'Chave de e-mail de destino não localizada. Digite um e-mail válido.', 'error');
-      document.getElementById('errochave').textContent = 'E-mail de destino não cadastrado.';
+      // A chave PIX de destino não existe, mostre uma mensagem de erro usando o SweetAlert
+      Swal.fire('Chave PIX não localizada', 'Chave PIX de destino não localizada. Digite uma chave PIX válida.', 'error');
+      document.getElementById('errochave').textContent = 'Chave PIX de destino não cadastrada.';
     }
   }
 });

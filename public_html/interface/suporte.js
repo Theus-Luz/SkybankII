@@ -12,6 +12,7 @@ menusuporte.addEventListener('click', function menuSup () {
         movimentos.style.display = 'none';
         areapag.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
     } else {
         suporte.style.display = 'block';
         pixtransf.style.display = 'none';
@@ -20,6 +21,7 @@ menusuporte.addEventListener('click', function menuSup () {
         movimentos.style.display = 'none';
         areapag.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
     }
 });
 

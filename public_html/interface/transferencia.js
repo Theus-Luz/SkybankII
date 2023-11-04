@@ -26,6 +26,7 @@ btntransf.addEventListener('click', function areaTransferir () {
         suporte.style.display = 'none';
         movimentos.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
 
     } else {
         areatransf.style.display = 'block';
@@ -35,7 +36,9 @@ btntransf.addEventListener('click', function areaTransferir () {
         suporte.style.display = 'none';
         movimentos.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
     }
+   
 
 });
 

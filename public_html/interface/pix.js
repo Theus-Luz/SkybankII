@@ -12,7 +12,6 @@ var chavecpf = document.querySelector('#chavecpf');
 var chavecnpj = document.querySelector('#chavecnpj');
 
 
-var valorSelecionado = selecao.value;
 
 
 
@@ -68,11 +67,11 @@ onload = function carregarSaldo(){
 
 
 
-function mostrarCaixaTexto(){
-  var selecao = document.getElementById("selecao");
-  var valorSelecionado = selecao.value;
-  var caixaTexto = document.getElementById("caixaTexto");
-}
+// function mostrarCaixaTexto(){
+//   var selecao = document.getElementById("selecao");
+//   var valorSelecionado = selecao.value;
+//   var caixaTexto = document.getElementById("caixaTexto");
+// }
 
 
 btnpix.addEventListener('click', function areaPix () {
@@ -84,6 +83,7 @@ btnpix.addEventListener('click', function areaPix () {
         suporte.style.display = 'none';
         movimentos.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
 
     } else {
         pixtransf.style.display = 'block';
@@ -93,6 +93,7 @@ btnpix.addEventListener('click', function areaPix () {
         suporte.style.display = 'none';
         movimentos.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
     }
 });
 

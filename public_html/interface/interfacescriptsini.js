@@ -250,3 +250,28 @@ function funcCadastro () {
             areapag.style.display = 'none';
         }
       }
+
+      function userPerfil() {
+        if (perfiluser.style.display === 'none') {
+           perfiluser.style.display = 'block';
+   
+            deposit.style.display = 'none';
+            areatransf.style.display = 'none';
+            areapag.style.display = 'none';
+            suporte.style.display = 'none';
+            movimentos.style.display = 'none';
+            btnssaq.style.display = 'none';
+          
+        } else {
+           pixtransf.style.display = 'block';
+           deposit.style.display = 'none';
+           areatransf.style.display = 'none';
+           areapag.style.display = 'none';
+           suporte.style.display = 'none';
+           movimentos.style.display = 'none';
+           btnssaq.style.display = 'none';
+   
+        }
+    }
+
+      

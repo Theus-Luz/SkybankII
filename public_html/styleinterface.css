@@ -10,7 +10,6 @@ body{
     
 }
 
-
 .menu{
     list-style: none;
     border: 1px solid #c0c0c0;
@@ -69,8 +68,8 @@ margin-bottom: 35px;
 
     display: flex;
     position: absolute;
-    top: 11%;
-    left: 27%;
+    top: 17%;
+    left: 21%;
     
 
     width: 300px;
@@ -122,9 +121,9 @@ margin-bottom: 35px;
     
     width: 700px;
     padding: 10px;
-    margin-left: 500px;
-    margin-right: 500px;
-    margin-top: 135px;
+    margin-left: 20%;
+    margin-right: 60%;
+    margin-top: 12%;
     display: flex;
     justify-content: center;
    
@@ -235,6 +234,10 @@ margin-bottom: 35px;
     margin-left: 4%;
     color: rgb(150, 150, 150);
 }
+.perfilInfo{
+    margin-left: 4%;
+    color: rgb(150, 150, 150);
+}
 #dep1{
     margin-top: 1%;
 }
@@ -255,10 +258,24 @@ margin-bottom: 35px;
     color: rgb(150, 150, 150);
 }
 
+.perfiluser {
+    display: none;
+    margin-left: 21%;
+    border: 1px solid rgb(150, 150, 150);
+    width: 38%;
+    background-color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 30px;
+}
+.txtperfil{
+    margin-top: 3%;
+    font-size: large;
+    margin-left: 4%;
+}
+
 .pixtransf{
     display: none;
-    margin-left: 515px;
-    margin-right: 500px;
+    margin-left: 21%;
     border: 1px solid rgb(150, 150, 150);
     width: 38%;
     background-color: white;
@@ -331,8 +348,7 @@ margin-bottom: 35px;
 #btnssaq{
     border-radius: 30px;
     display: none;
-    margin-left: 515px;
-    margin-right: 500px;
+    margin-left: 21%;
     border: 1px solid rgb(150, 150, 150);
     width: 39%;
     background-color: white;
@@ -359,8 +375,7 @@ margin-bottom: 35px;
 .deposit{
     border-radius: 30px;
     display: none;
-    margin-left: 515px;
-    margin-right: 500px;
+    margin-left: 21%;   
     border: 1px solid rgb(150, 150, 150);
     width: 39%;
     background-color: white;
@@ -374,12 +389,17 @@ margin-bottom: 35px;
     margin-left: 4%;
     margin-bottom: 20px;
 }
-
+.btnsperfil{
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 4%;
+    margin-bottom: 20px;
+}
 .areatransf{
     border-radius: 30px;
     display: none;
-    margin-left: 515px;
-    margin-right: 500px;
+    margin-left: 21%;
+   
     border: 1px solid rgb(150, 150, 150);
     width: 39%;
     background-color: white;
@@ -396,8 +416,7 @@ margin-bottom: 35px;
 .areapag{
     border-radius: 30px;
     display: none;
-    margin-left: 515px;
-    margin-right: 500px;
+    margin-left: 21%;
     border: 1px solid rgb(150, 150, 150);
     width: 39%;
     background-color: white;
@@ -414,8 +433,7 @@ margin-bottom: 35px;
 .suporte{
     border-radius: 30px;
     display: none;
-    margin-left: 515px;
-    margin-right: 500px;
+    margin-left: 21%;
     border: 1px solid rgb(150, 150, 150);
     width: 47%;
     background-color: white;
@@ -441,8 +459,7 @@ margin-bottom: 35px;
 
 .perfil{
     display: none;
-    margin-left: 515px;
-    margin-right: 500px;
+    margin-left: 21%;
     border: 1px solid rgb(150, 150, 150);
     width: 47%;
     background-color: white;
@@ -517,7 +534,7 @@ margin-bottom: 35px;
 
 .movimentos{
     display: none;
-    margin-left: 480px;
+    margin-left: 21%;
     width: 36%;
     background-color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -557,3 +574,162 @@ footer {
 
     
     }
+
+    /* CHAT NA INTERFACE */
+    #qchat{
+        text-align: center;
+    }
+    .float-buttonc {
+        position: fixed;
+        bottom: 30px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #0078d4;
+        color: white;
+        font-size: 30px;
+        text-align: center;
+      }
+      .float-buttonc:hover {
+        background-color: #106ebe;
+      }
+      .modalchat {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgba(0,0,0,0.4); 
+    }
+    
+    .modalchat-contentc {
+        background-color: #fefefe;
+        margin: auto;
+        margin-top: 20px;
+        /* margin: auto; */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 580px;
+        height: 580px;
+        border-radius: 16px;
+    }
+    
+    .close-buttonc {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close-buttonc:hover,
+    .close-buttonc:focus {
+        color: #000000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+    /* CHAT BOX CONTEUDO */
+
+    .containerchat {
+        margin: auto;
+        width: 450px;
+        height: 500px;
+        background-color: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+    .headerchat {
+  
+        background-color: #007bff;
+        background: linear-gradient(
+      90deg,
+      rgb(56, 132, 245) 0%,
+      rgb(70, 200, 252) 55%,
+      rgba(70, 200, 252) 100%
+      );
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        font-size: 20px;
+      }
+      
+      .bodychat {
+        flex-grow: 1;
+        overflow-y: scroll;
+        padding: 10px;
+      }
+      
+      .message {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 15px 0px;
+        margin-bottom: 10px;
+        max-width: 70%;
+      }
+      
+      .user_message {
+        background-color: #007bff;
+        color: #fff;
+        margin-left: auto;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        max-width: 70%;
+      }
+      
+      .footerchat {
+        padding: 10px;
+        border-top: 1px solid #ccc;
+      }
+      
+      form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      input[type="text"] {
+        flex: 1;
+        padding: 16px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+      }
+      
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      button:hover {
+        background-color: #0056b3;
+      }
+      .volte{
+        position: absolute;
+        margin-top: 30%;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: rgb(70, 200, 252);
+      }
+      
+      #imgassist{
+        float: left;
+        margin-right: 5%;
+        width: 45px;
+      }

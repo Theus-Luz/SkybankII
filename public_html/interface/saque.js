@@ -14,6 +14,7 @@ btnsacar.addEventListener('click', function botaoSacar() {
       deposit.style.display = 'none';
       suporte.style.display = 'none';
       movimentos.style.display = 'none';
+      perfiluser.style.display = 'none'
   
       areapag.style.display = 'none';
   } else {
@@ -23,6 +24,7 @@ btnsacar.addEventListener('click', function botaoSacar() {
       deposit.style.display = 'none';
       suporte.style.display = 'none';
       movimentos.style.display = 'none';
+      perfiluser.style.display = 'none'
 
       areapag.style.display = 'none';
   }

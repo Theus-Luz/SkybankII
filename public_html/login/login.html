@@ -2,28 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE-=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="/Login/style.css">
-    <script src="/Login/loginscriptsFinal.js"></script> <!-- Inclua o arquivo JavaScript do lado do cliente -->
-
 </head>
 <title>SkyBank, O seu Banco</title>
 <div class="contener">
     <h1></h1>
     <img src="/imagens/Skybank.png" alt="" id="img1">
-
-    <div class="input-campos">
-        <input required type="text" value="" id="email" class="input">
-        <label for="email">E-mail</label>
-        <br>
-        <br>
-        <br>
-        <input required type="password" value="" id="senha" class="input">
-        <label for="senha">Senha</label>
-    </div>
-    <input type="button" value="Entre" id="entrar">
+    <form id="login-form" name="login-form">
+        <input type="text" id="email" name="email" placeholder="E-mail" required>
+        <input type="password" id="senha" name="senha" placeholder="Senha" required>
+        <input type="button" value="Entre" id="entrar">
+    </form>
     <br>
     <br>
     <br>
@@ -33,4 +24,41 @@
 </div>
 <body>
 </body>
+<script src="/login/loginscriptsFinal.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.forms["login-form"];
+        const emailInput = form.elements["email"];
+        const senhaInput = form.elements["senha"];
+        const mensagem = document.getElementById("mensagem");
+        const entrarButton = document.getElementById("entrar");
+
+        entrarButton.addEventListener("click", async function () {
+            const email = emailInput.value;
+            const senha = senhaInput.value;
+
+            try {
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email, senha }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const token = data.token;
+                    localStorage.setItem("token", token);
+                    window.location.href = "/interface.html";
+                } else {
+                    mensagem.textContent = "Credenciais inválidas. Tente novamente.";
+                }
+            } catch (error) {
+                console.error("Erro ao fazer login:", error);
+                mensagem.textContent = "Erro ao fazer login. Tente novamente mais tarde.";
+            }
+        });
+    });
+</script>
 </html>

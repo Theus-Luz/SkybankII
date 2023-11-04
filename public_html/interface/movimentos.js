@@ -32,6 +32,7 @@ menuMov.addEventListener('click', function menuMov1 () {
         suporte.style.display = 'none';
         areapag.style.display = 'none';
         btnssaq.style.display = 'none';
+        perfiluser.style.display = 'none'
 
     } else {
         movimentos.style.display = 'block';
@@ -41,6 +42,7 @@ menuMov.addEventListener('click', function menuMov1 () {
         suporte.style.display = 'none';
         btnssaq.style.display = 'none';
         areapag.style.display = 'none';
+        perfiluser.style.display = 'none'
 
     }
 });
