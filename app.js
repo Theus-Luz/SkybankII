@@ -49,7 +49,7 @@ async function criarTabelaUsuarios() {
     await connection.execute(`
       CREATE TABLE IF NOT EXISTS usuarios (
         idcadastro INT AUTO_INCREMENT PRIMARY KEY,
-        saldo INT,
+        saldo FLOAT,
         nome VARCHAR(45),
         nomesocial VARCHAR(45),
         email VARCHAR(45) UNIQUE,  -- Adiciona a restrição UNIQUE para email
