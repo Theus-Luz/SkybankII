@@ -168,8 +168,7 @@ app.listen(port, () => {
 
 
 
-//Verificar se E-mail existe no banco de dados
-// Rota para realizar a transferência
+// Rota para realizar a transferência PIX !
 app.post('/realizar-transferencia', async (req, res) => {
   const chavePixDestino = req.body.chavePixDestino;
   const valorTransferencia = req.body.valorTransferencia;
