@@ -163,3 +163,12 @@ div.campos2 .caixa1:valid ~label{
     cursor: pointer;
     
 }
+.error {
+    border-bottom: 2px solid red; /* Adiciona uma borda vermelha para indicar um erro */
+    color: red; /* Define a cor do texto para vermelho */
+  }
+  
+  #emailerror{
+    display: none;
+  }
+

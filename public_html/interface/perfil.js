@@ -111,3 +111,38 @@ cadastrarPixButton.addEventListener('click', async () => {
 
 
 
+
+// Evento de clique no botão para buscar informações do usuário
+document.getElementById("buscarInformacoesUsuario").addEventListener("click", async () => {
+  const emailDoUsuario = "Kylers@skybank"; // Substitua pelo email real
+
+  try {
+    const response = await fetch(`http://localhost:3000/buscar-informacoes-usuario/${emailDoUsuario}`);
+    if (response.ok) {
+      const informacoesDoUsuario = await response.json();
+      preencherInformacoesNoHTML(informacoesDoUsuario);
+    } else {
+      console.log('Usuário não encontrado');
+    }
+  } catch (error) {
+    console.error('Erro ao buscar informações do usuário:', error);
+  }
+});
+
+// Função para preencher as informações no HTML
+function preencherInformacoesNoHTML(informacoesDoUsuario) {
+  document.getElementById("nomeUsuario").textContent = informacoesDoUsuario.nome;
+  document.getElementById("emailUsuario").textContent = informacoesDoUsuario.email;
+  document.getElementById("cpfUsuario").textContent = informacoesDoUsuario.cpf;
+  document.getElementById("chavePixUsuario").textContent = informacoesDoUsuario.chavepix;
+  document.getElementById("agenciaUsuario").textContent = informacoesDoUsuario.agencia;
+  document.getElementById("contaUsuario").textContent = informacoesDoUsuario.conta;
+}
+
+
+// Chame a função para buscar as informações ao carregar a página
+window.addEventListener("load", () => {
+  buscarUsuarioPorEmail(emailDoUsuario);
+});
+
+

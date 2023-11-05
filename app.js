@@ -2,14 +2,10 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const app = express();
 const port = 3000;
-const cors = require('cors'); // Importe o pacote 'cors' aqui
+const cors = require('cors');
 
-
-app.use(cors()); // Habilite o CORS para permitir solicitações de diferentes origens
-// Middleware para analisar o corpo das solicitações como JSON
+app.use(cors());
 app.use(express.json());
-
-// Configuração para servir arquivos estáticos
 app.use(express.static('public_html'));
 app.use(express.static('public'));
 
@@ -17,52 +13,29 @@ app.get('/cadastro', (req, res) => {
   res.sendFile(__dirname + '/public_html/cadastro/cadastro.html');
 });
 
-
-// Rota para a página de login
 app.get('/login', (req, res) => {
   res.sendFile(__dirname + '/public_html/login/login.html');
 });
-
-//funçao login
 
 app.post('/login', (req, res) => {
   const { email, senha } = req.body;
 
   const jwt = require('jsonwebtoken');
-  // Simule uma lógica de verificação de credenciais (substitua isso por sua própria lógica)
-  if (email === 'email' && senha === 'senha') {
-    // Gere um token de autenticação (exemplo com JWT)
-    const token = 'seu_token_jwt';
 
-    // Envie o token como resposta
+  if (email === 'email' && senha === 'senha') {
+    const token = 'seu_token_jwt';
     res.json({ token });
   } else {
-    // Se as credenciais não forem válidas, envie uma resposta de não autorizado
     res.status(401).json({ error: 'Credenciais inválidas' });
   }
 });
 
-
-
-// Fim
-
-
-
-
-
-
-
-
-
-// Rota para a página inicial (interface.html)
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public_html/interface/interface.html');
 });
 
-// Middleware para lidar com solicitações JSON
 app.use(express.json());
 
-// Configuração do banco de dados
 const dbConfig = {
   host: 'localhost',
   user: 'root',
@@ -70,7 +43,6 @@ const dbConfig = {
   database: 'skybankv2',
 };
 
-// Função para criar a tabela de usuários com 'idcadastro' como autoincremento
 async function criarTabelaUsuarios() {
   try {
     const connection = await mysql.createConnection(dbConfig);
@@ -80,10 +52,12 @@ async function criarTabelaUsuarios() {
         saldo INT,
         nome VARCHAR(45),
         nomesocial VARCHAR(45),
-        email VARCHAR(45),
-        cpf VARCHAR(45),
+        email VARCHAR(45) UNIQUE,  -- Adiciona a restrição UNIQUE para email
+        cpf VARCHAR(45) UNIQUE,    -- Adiciona a restrição UNIQUE para CPF
         senha VARCHAR(45),
-        chavepix VARCHAR(45)
+        chavepix VARCHAR(45),
+        agencia VARCHAR(45),
+        conta VARCHAR(45)
       )
     `);
     await connection.end();
@@ -92,19 +66,34 @@ async function criarTabelaUsuarios() {
     console.error('Erro ao criar a tabela de usuários:', error);
   }
 }
-// Rota para inserir um novo usuário
+
 app.post('/inserir-usuario', async (req, res) => {
-  const { nome,nomesocial, email, cpf, senha } = req.body;
-  
-  console.log('Dados recebidos:', nome,nomesocial, email, cpf, senha);
+  const { nome, nomesocial, email, cpf, senha } = req.body;
+
+  // Verifique se o email ou CPF já existem no banco de dados
+  const connection = await mysql.createConnection(dbConfig);
+  const [emailRows] = await connection.execute('SELECT COUNT(*) as count FROM usuarios WHERE email = ?', [email]);
+  const [cpfRows] = await connection.execute('SELECT COUNT(*) as count FROM usuarios WHERE cpf = ?', [cpf]);
+  await connection.end();
+
+  if (emailRows[0].count > 0) {
+    return res.status(400).json({ error: 'Email já cadastrado.' });
+  }
+
+  if (cpfRows[0].count > 0) {
+    return res.status(400).json({ error: 'CPF já cadastrado.' });
+  }
+
+  // Se o email e o CPF são únicos, prossiga com o cadastro
+  const conta = generateRandomNumber(); // Gere um número aleatório
 
   try {
     const connection = await mysql.createConnection(dbConfig);
     const [rows, fields] = await connection.execute(
-      'INSERT INTO usuarios (nome,nomesocial, email, cpf, senha) VALUES (?, ?, ?, ?, ?)',
-      [nome,nomesocial, email, cpf, senha]
+      'INSERT INTO usuarios (nome, nomesocial, email, cpf, senha, conta) VALUES (?, ?, ?, ?, ?, ?)',
+      [nome, nomesocial, email, cpf, senha, conta]
     );
-    
+
     await connection.end();
     console.log('Novo usuário inserido com sucesso!');
     res.status(201).send('Usuário inserido com sucesso');
@@ -113,6 +102,37 @@ app.post('/inserir-usuario', async (req, res) => {
     res.status(500).send('Erro ao inserir usuário');
   }
 });
+
+// Resto do seu código permanece inalterado
+
+
+app.post('/inserir-usuario', async (req, res) => {
+  const { nome, nomesocial, email, cpf, senha } = req.body;
+  const conta = generateRandomNumber(); // Gere um número aleatório
+
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    const [rows, fields] = await connection.execute(
+      'INSERT INTO usuarios (nome, nomesocial, email, cpf, senha, conta) VALUES (?, ?, ?, ?, ?, ?)',
+      [nome, nomesocial, email, cpf, senha, conta]
+    );
+
+    await connection.end();
+    console.log('Novo usuário inserido com sucesso!');
+    res.status(201).send('Usuário inserido com sucesso');
+  } catch (error) {
+    console.error('Erro ao inserir usuário:', error);
+    res.status(500).send('Erro ao inserir usuário');
+  }
+});
+
+// Função para gerar um número aleatório de 6 dígitos
+function generateRandomNumber() {
+  const min = 100000; // Menor número de 6 dígitos
+  const max = 999999; // Maior número de 6 dígitos
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 
 // Rota para buscar o saldo do usuário (por email)
 app.get('/buscar-saldo', async (req, res) => {
@@ -292,6 +312,67 @@ app.post('/verificar-chavepix-existente', async (req, res) => {
 
 
 
+// Rota para buscar informações do usuário por email
+app.get('/buscar-informacoes-usuario/:email', async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+
+    const [results] = await connection.execute('SELECT nome, email, cpf, chavepix, agencia, conta FROM usuarios WHERE email = ?', [email]);
+
+    if (results.length > 0) {
+      const informacoesDoUsuario = results[0];
+      res.json(informacoesDoUsuario);
+    } else {
+      res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    await connection.end();
+  } catch (error) {
+    console.error('Erro ao buscar informações do usuário:', error);
+    res.status(500).json({ error: 'Erro ao buscar informações do usuário' });
+  }
+});
 
 
+
+//Saque
+// Rota para realizar o saque
+app.post('/realizar-saque', async (req, res) => {
+  const valorDoSaque = req.body.valor;
+  const emailUsuario = 'Kylers@skybank'; // Substitua pelo e-mail do usuário
+
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+
+    // Primeiro, obtenha o ID do usuário com base no e-mail
+    const [userRows] = await connection.execute('SELECT idcadastro, saldo FROM usuarios WHERE email = ?', [emailUsuario]);
+
+    if (userRows.length === 1) {
+      const idDoUsuario = userRows[0].idcadastro;
+      const saldoDoUsuario = userRows[0].saldo;
+
+      if (saldoDoUsuario >= valorDoSaque) {
+        // Execute a consulta SQL para atualizar o saldo do usuário
+        const updateQuery = 'UPDATE usuarios SET saldo = saldo - ? WHERE idcadastro = ?';
+
+        await connection.query(updateQuery, [valorDoSaque, idDoUsuario]);
+
+        // Atualize o saldo do usuário na resposta
+        const novoSaldo = saldoDoUsuario - valorDoSaque;
+
+        // O saque foi bem-sucedido, envie o novo saldo na resposta
+        res.json({ message: 'Saque realizado com sucesso', novoSaldo });
+      } else {
+        res.status(400).json({ error: 'Saldo insuficiente para o saque.' });
+      }
+    } else {
+      res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+  } catch (error) {
+    console.error('Erro ao realizar o saque:', error);
+    res.status(500).json({ error: 'Erro ao realizar o saque.' });
+  }
+});
 

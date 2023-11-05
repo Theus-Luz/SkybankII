@@ -69,14 +69,27 @@
 
 </div>
 
-</div>
-
 <div class="perfiluser" id="perfiluser">
   <p class="txtperfil">Bem-vindo ao seu Perfil</p>
+
+  <button id="buscarInformacoesUsuario">Ver dados da conta</button>
+
   <p class="perfilInfo">Suas informações:</p>
+  <p class="perfilInfo" id="perfilnome">Nome: </p> <p id="nomeUsuario" class="perfildados">******</p>
+  
+  <p class="perfilInfo" id="perfilemail">Email: <p id="emailUsuario" class="perfildados">******@******</p></p>
+  <p class="perfilInfo" id="perfilcpf">CPF: <p id="cpfUsuario" class="perfildados">********</p></p>
+  <p class="perfilInfo" id="perfilchavepix">Chave PIX: <p id="chavePixUsuario" class="perfildados">********</p></p>
+  <p class="perfilInfo" id="perfilagencia">Agência: <p id="agenciaUsuario" class="perfildados">****</p></p>
+  <p class="perfilInfo" id="perfilconta">Conta: <p id="contaUsuario" class="perfildados">******</p></p>
+  
+
   <p class="perfilInfo">Cadastre sua Chave Pix!</p>
-  <input type="text" name="cadastraNovaChave" id="cadastraNovaChave" class="btnsperfil">
+  <input type="text" name="cadastraNovaChave" id="cadastraNovaChave" class="btnsperfil" placeholder="R$">
   <input type="button" value="OK" id="cadastrarPixButton" class="btnsperfil">
+</div>
+</div>
+
 </div>
 
 
@@ -93,7 +106,7 @@
 
 
   <p class="txtpix1">Digite a chave PIX do destinatário:</p>
-  <input type="text" id="entraemail" placeholder="Chave PIX do destinatário" class="btnspix">
+  <input type="text" name="enviaPix" id="entraemail" placeholder="Chave PIX" class="btnspix">
 
   <div id="errochave" class="errospix"></div>
 
@@ -257,7 +270,6 @@
 
 <div class="suporte">
     <p class="suportstyle"> Você esta na Central de Atendimento!</p> 
-    <p class="suportstyle">   Acesse o nosso  <a href="http://127.0.0.1:5503/Interface/Chatbot/chatbot.html">CHATBOT</a>.</p>
     <p class="suportstyle">Há dúvidas ?  <a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html">Veja nossa FAQ</a>.</p>
 
     <p class="suportstyle">Ainda precisa de ajuda? Fale conosco através dos nosso canais de atendimento: </p>
