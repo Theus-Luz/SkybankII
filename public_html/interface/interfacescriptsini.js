@@ -75,6 +75,7 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
         } else {
             pixtransf.style.display = 'block';
             deposit.style.display = 'none';
@@ -83,6 +84,7 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
         }
     }
     
@@ -95,6 +97,8 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
+
         } else {
             deposit.style.display = 'block';
             pixtransf.style.display = 'none';
@@ -103,6 +107,7 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
         }
     }
     
@@ -116,6 +121,7 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
         } else {
             areatransf.style.display = 'block';
             pixtransf.style.display = 'none';
@@ -124,6 +130,7 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
         }
     }
     
@@ -137,6 +144,7 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
         } else {
             areapag.style.display = 'block';
             pixtransf.style.display = 'none';
@@ -145,6 +153,7 @@ function funcCadastro () {
             suporte.style.display = 'none';
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
+            perfiluser.style.display = 'none'
         }
     }
     
@@ -158,6 +167,7 @@ function funcCadastro () {
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
             areapag.style.display = 'none';
+            perfiluser.style.display = 'none'
         } else {
             suporte.style.display = 'block';
             pixtransf.style.display = 'none';
@@ -166,6 +176,7 @@ function funcCadastro () {
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
             areapag.style.display = 'none';
+            perfiluser.style.display = 'none'
         }
     }
     
@@ -179,6 +190,7 @@ function funcCadastro () {
             perfil.style.display = 'none';
             suporte.style.display = 'none';
             areapag.style.display = 'none';
+            perfiluser.style.display = 'none'
         } else {
             movimentos.style.display = 'block';
             pixtransf.style.display = 'none';
@@ -187,6 +199,7 @@ function funcCadastro () {
             perfil.style.display = 'none';
             suporte.style.display = 'none';
             areapag.style.display = 'none';
+            perfiluser.style.display = 'none'
         }
     }
     function contaPerfil () {
@@ -239,6 +252,7 @@ function funcCadastro () {
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
             areapag.style.display = 'none';
+            perfiluser.style.display = 'none'
         } else {
             btnssaq.style.display = 'block';
             areatransf.style.display = 'none';
@@ -248,6 +262,7 @@ function funcCadastro () {
             movimentos.style.display = 'none';
             perfil.style.display = 'none';
             areapag.style.display = 'none';
+            perfiluser.style.display = 'none'
         }
       }
 

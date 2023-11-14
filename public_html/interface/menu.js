@@ -38,7 +38,7 @@ pixtransf.style.display = 'none',
       areapag.style.display = 'none',
       suporte.style.display = 'none';
       btnssaq.style.display = 'none';
-
+      perfiluser.style.display = 'none'
 });
 // btnCadastro.addEventListener('click', funcCadastro);
 

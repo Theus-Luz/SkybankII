@@ -42,120 +42,107 @@ btntransf.addEventListener('click', function areaTransferir () {
 
 });
 
-addEventListener('input', function() {
-  // Remove todos os caracteres numéricos do nome
-  const valor = caixaNome.value;
-  const nomeApenasLetras = valor.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
-    caixaNome.value = nomeApenasLetras;
-  
+// Adicione um evento de clique ao botão "Transferir TED"
+const btnTED = document.getElementById('btnted');
+btnTED.addEventListener('click', async () => {
+  const nomeDestinatario = document.getElementById('caixaNome').value;
+  const cpfDestino = document.getElementById('caixaCpf').value;
+  const agenciaDestino = document.getElementById('caixaAgencia').value;
+  const contaDestino = document.getElementById('caixaConta').value;
+  const valorTransferencia = parseFloat(document.getElementById('caixaValor').value);
 
-  // Remove todos os caracteres não numéricos
-  const cpf = caixaCpf.value.replace(/\D/g, '');
-  const agencia = caixaAgencia.value.replace(/\D/g, '');
-  const conta = caixaConta.value.replace(/\D/g, '');
- 
-  
-if(cpf.length > 11) {caixaCpf.value = cpf.substring(0,11);} // Limita o CPF a 11 dígitos
-if (agencia.length > 4) {caixaAgencia.value = agencia.substring(0, 4);}// Limita a Agencia em 4 digitos
-if (conta.length > 4) {caixaConta.value = conta.substring(0, 4);}// Limita a Conta em 4 digitos
-});
+  // Limpar mensagens de erro anteriores
+  document.getElementById('nometed').textContent = '';
+  document.getElementById('cpfted').textContent = '';
+  document.getElementById('agenciated').textContent = '';
+  document.getElementById('contated').textContent = '';
+  document.getElementById('valorted').textContent = '';
 
+  // Verificar se os campos estão preenchidos corretamente
+  let hasError = false;
 
-btnted.addEventListener('click', function(){
+  if (nomeDestinatario === '') {
+    document.getElementById('nometed').textContent = 'Informe o nome.';
+    hasError = true;
+  }
 
-  var saldocontaElement = document.getElementById('saldoconta');
-  var saldoconta = parseFloat(saldocontaElement.innerText);
-  valordatransferencia = caixaValor.value;
+  if (cpfDestino === '' || cpfDestino.length !== 11) {
+    document.getElementById('cpfted').textContent = 'Informe um CPF válido com 11 dígitos.';
+    hasError = true;
+  }
 
-  if(caixaNome.value == '') {nometed.innerHTML = "Entre com um Nome!"}
-  if(caixaCpf.value == '') {cpfted.innerHTML = "Entre com um CPF!"}
-  if(caixaAgencia.value == ''){agenciated.innerHTML = "Entre com uma agencia"}
-  if(caixaConta.value == ''){contated.innerHTML = "Entre com uma Conta"}
-  if(caixaValor.value == ''){valorted.innerHTML = "Entre com um Valor!"}
-  
-  
-  
-   if(caixaNome.value != '' && caixaCpf.value != '' && caixaAgencia != '' && caixaConta != '' && caixaValor != ''){
+  if (agenciaDestino === '' || agenciaDestino.length !== 4) {
+    document.getElementById('agenciated').textContent = 'Informe uma agência válida com 4 dígitos.';
+    hasError = true;
+  }
+
+  if (contaDestino === '' || contaDestino.length !== 6) {
+    document.getElementById('contated').textContent = 'Informe uma conta válida com 6 dígitos.';
+    hasError = true;
+  }
+
+  if (isNaN(valorTransferencia) || valorTransferencia <= 0) {
+    document.getElementById('valorted').textContent = 'Informe um valor de transferência válido.';
+    hasError = true;
+  }
+
+  if (hasError) {
+    // Exibir mensagem de erro
+    Swal.fire('Erro', 'Corrija os erros antes de prosseguir.', 'error');
+    return;
+  }
     
-    nometed.innerHTML = '',
-   cpfted.innerHTML = '',
-   agenciated.innerHTML = '',
-   contated.innerHTML = '',
-   valorted.innerHTML = '',
-  
-  
-  
-  (saldoconta)
-  
-  
-    if(saldoconta > 0 && valordatransferencia <= saldoconta) {
-
-    Swal.fire({
-    title: 'Você esta preste a finalizar sua Transferência',
-    text: "Se os dados estiverem corretos, clique em Prosseguir, para Prosseguir com sua Transferência!",
-    icon: 'warning',
+  const confirmacaoTransferencia = await Swal.fire({
+    title: 'Confirme os dados',
+    text: 'Se os dados estiverem corretos, clique em Prosseguir para continuar com a Transferência!',
+    icon: 'info',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     cancelButtonText: 'Cancelar',
     confirmButtonText: 'Prosseguir'
- }).then((result) => {
-    if (result.isConfirmed) {
+  });
 
-      saldoconta -= parseFloat(valordatransferencia);
-      saldocontaElement.innerText = saldoconta.toFixed(2);
-
-      Swal.fire(
-       
-
-        'Obrigado por Usar nosso Banco!',
-        'Sua Transferência foi realizada com sucesso!',
-        'success' )}})
-
+  if (confirmacaoTransferencia.isConfirmed) {
+    try {
+      const transferenciaResponse = await fetch('/realizar-transferencia-ted', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nomeDestinatario: nomeDestinatario,
+          cpfDestino: cpfDestino,
+          agenciaDestino: agenciaDestino,
+          contaDestino: contaDestino,
+          valorTransferencia: valorTransferencia,
+        }),
+      });
     
+      if (transferenciaResponse.status === 201) {
+        const data = await transferenciaResponse.json();
+        console.log('Dados retornados:', data); // Adicione esta linha para depuração
+        Swal.fire('Transferência TED realizada com sucesso!', '', 'success');
+        buscarSaldo(); // Certifique-se de que esta função está funcionando corretamente
+      } else if (transferenciaResponse.status === 400) {
+        Swal.fire('Saldo Insuficiente', 'Você não possui saldo suficiente para realizar a transferência TED.', 'error');
+      } else if (transferenciaResponse.status === 404) {
+        Swal.fire('Dados não localizados', 'Os dados informados não foram encontrados. Por segurança, não informaremos qual dados esta incorreto,Verifique os dados e tente novamente!', 'error');
       } else {
-          Swal.fire({
-            icon: 'error',
-           title: 'Oops...',
-            text: 'Você não tem saldo para realizar a transferência!',
-            footer: '<a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html"> Esta com dificuldade para Sacar? Acesse nossa Faq</a>'
-          })}
+        Swal.fire('Erro na Transferência TED', 'Houve um erro ao realizar a transferência TED. Tente novamente mais tarde.', 'error');
+        console.error('Erro ao realizar a transferência TED:', transferenciaResponse.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao realizar a transferência TED:', error);
+      Swal.fire('Erro na Transferência TED', 'Houve um erro ao realizar a transferência TED. Tente novamente mais tarde.', 'error');
+    }
+}});
 
-    
-        }});
+
 
   
 
 
-  
-
-
-  
-
-// entrapix.value > 1 && entrachave.value > 1
 
 
 
-
-
-
-
-// btnted.addEventListener('click', function btnTransferir(){
-//     Swal.fire({
-//         title: 'Confirme sua Transferência',
-//         text: "Você esta presta a finalizar sua Transferência, Confirme se os dados estão corretos!",
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonColor: '#3085d6',
-//         cancelButtonColor: '#d33',
-//         confirmButtonText: 'Transferir'
-//       }).then((result) => {
-//         if (result.isConfirmed) {
-//           Swal.fire(
-//             'Obrigado por Usar nosso Banco!',
-//             'Sua Transferência foi realizada com sucesso!',
-//             'success'
-//           )
-//         }
-//       })
-// })

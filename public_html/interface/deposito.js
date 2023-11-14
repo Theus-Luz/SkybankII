@@ -1,7 +1,6 @@
 // const numeroAleatorio = Math.floor(Math.random() * 333333333333333330);
 
 var btndep = document.querySelector('#dep');
-var depvalor = document.querySelector('#dep1');
 var deposit = document.querySelector('.deposit');
 var btnboleto = document.querySelector('#boletogerado');
 var errodep = document.querySelector('#errodep');
@@ -16,15 +15,20 @@ btndep.addEventListener('click', function areaDep () {
       movimentos.style.display = 'none';
       perfil.style.display = 'none';
       btnssaq.style.display = 'none';
+      perfiluser.style.display = 'none'
+      
+
   } else {
       deposit.style.display = 'block';
+      btnssaq.style.display = 'none'
       pixtransf.style.display = 'none';
       areatransf.style.display = 'none';
       areapag.style.display = 'none';
       suporte.style.display = 'none';
       movimentos.style.display = 'none';
       perfil.style.display = 'none';
-      btnssaq.style.display = 'none';
+      
+      perfiluser.style.display = 'none'
   }
 });
 
@@ -184,7 +188,6 @@ sendButton.addEventListener('click', function (e) {
     e.preventDefault();
     processUserInput();
 });
-
 
 document.getElementById('meuFormulario').addEventListener('submit', function(event) {
     event.preventDefault();

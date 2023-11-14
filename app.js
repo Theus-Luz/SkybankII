@@ -374,4 +374,81 @@ app.post('/realizar-saque', async (req, res) => {
     res.status(500).json({ error: 'Erro ao realizar o saque.' });
   }
 });
+// Função para criar uma conexão com o banco de dados
+async function createConnection() {
+  const connection = await mysql.createConnection(dbConfig);
+  return connection;
+}
+
+app.post('/realizar-transferencia-ted', async (req, res) => {
+  const nomeDestinatario = req.body.nomeDestinatario;
+  const cpfDestino = req.body.cpfDestino;
+  const agenciaDestino = req.body.agenciaDestino;
+  const contaDestino = req.body.contaDestino;
+  const valorTransferencia = req.body.valorTransferencia;
+  const emailOrigem = 'Kylers@skybank'; // Substitua pelo e-mail do usuário de origem
+
+  try {
+    // Crie uma conexão com o banco de dados
+    const connection = await createConnection();
+
+    // Lógica para encontrar o usuário de destino
+    const [destinoRows] = await connection.execute(
+      'SELECT saldo FROM usuarios WHERE nome = ? AND cpf = ? AND agencia = ? AND conta = ?',
+      [nomeDestinatario, cpfDestino, agenciaDestino, contaDestino]
+    );
+
+    if (destinoRows.length === 1) {
+      // Usuário de destino encontrado, prossiga com a transferência
+      const [origemRows] = await connection.execute('SELECT saldo FROM usuarios WHERE email = ?', [emailOrigem]);
+
+      if (origemRows.length === 1) {
+        const saldoOrigem = origemRows[0].saldo;
+
+        if (saldoOrigem >= valorTransferencia) {
+          // Atualize o saldo do usuário de origem
+          await connection.execute('UPDATE usuarios SET saldo = saldo - ? WHERE email = ?', [valorTransferencia, emailOrigem]);
+
+          const saldoDestino = destinoRows[0].saldo;
+          const novoSaldoDestino = saldoDestino + valorTransferencia;
+
+          // Atualize o saldo do usuário de destino
+          await connection.execute(
+            'UPDATE usuarios SET saldo = ? WHERE nome = ? AND cpf = ? AND agencia = ? AND conta = ?',
+            [novoSaldoDestino, nomeDestinatario, cpfDestino, agenciaDestino, contaDestino]
+          );
+
+          console.log('Transferência TED realizada com sucesso!');
+
+          // Busque novamente o saldo do usuário de origem
+          const [novoSaldos] = await connection.execute('SELECT saldo FROM usuarios WHERE email = ?', [emailOrigem]);
+
+          if (novoSaldos.length === 1) {
+            const novoSaldoOrigem = novoSaldos[0].saldo;
+
+            // Envie o novo saldo de volta para o cliente
+            res.status(201).json({ success: true, novoSaldoOrigem: novoSaldoOrigem });
+          } else {
+            // Caso não seja possível obter o novo saldo, envie uma resposta de erro
+            res.status(500).json({ success: false, error: 'Erro ao obter o novo saldo do usuário de origem.' });
+          }
+        } else {
+          res.status(400).json({ success: false, error: 'Saldo insuficiente para a transferência.' });
+        }
+      } else {
+        res.status(404).json({ success: false, error: 'Usuário de origem não encontrado.' });
+      }
+    } else {
+      res.status(404).json({ success: false, error: 'Usuário de destino não encontrado.' });
+    }
+
+    // Feche a conexão após a conclusão da lógica
+    await connection.end();
+  } catch (error) {
+    console.error('Erro ao realizar a transferência TED:', error);
+
+    // Envie uma resposta de erro
+    res.status(500).json({ success: false, error: 'Erro ao realizar a transferência TED.' });
+  }
+});
 

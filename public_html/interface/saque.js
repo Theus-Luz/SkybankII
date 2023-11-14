@@ -15,7 +15,6 @@ btnsacar.addEventListener('click', function botaoSacar() {
       suporte.style.display = 'none';
       movimentos.style.display = 'none';
       perfiluser.style.display = 'none'
-  
       areapag.style.display = 'none';
   } else {
       btnssaq.style.display = 'block';
@@ -25,7 +24,6 @@ btnsacar.addEventListener('click', function botaoSacar() {
       suporte.style.display = 'none';
       movimentos.style.display = 'none';
       perfiluser.style.display = 'none'
-
       areapag.style.display = 'none';
   }
 });
@@ -90,10 +88,8 @@ document.getElementById('saqueButton').addEventListener('click', () => {
             if (data.novoSaldo !== undefined) {
               // Se o novo saldo estiver definido na resposta
               const novoSaldo = data.novoSaldo;
-
-              // Atualize o elemento HTML que exibe o saldo com o novo saldo
-              document.getElementById('saldoconta').textContent = novoSaldo.toFixed(2);
-              console.log('Saque realizado com sucesso! Novo saldo:', novoSaldo);
+               // Atualize o saldo na interface
+      buscarSaldo();
 
               // Exiba um SweetAlert de sucesso
               Swal.fire('Saque Realizado', 'Saque realizado com sucesso!', 'success');

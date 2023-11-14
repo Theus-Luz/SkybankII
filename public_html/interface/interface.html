@@ -61,11 +61,12 @@
 
     <div class="botoes">
     <input type="button" value="Pix" class="btninter" id="pix">
-    <input type="button" value="Depósito" class="btninter" id="dep">
-    <input type="button" value="Saque" class="btninter" id="saq">
     <input type="button" value="Transferência" class="btninter" id="transf">
+    
+    <input type="button" value="Saque" class="btninter" id="saq">
+    
     <input type="button" value="Pagamento" class="btninter" id="pag">
-   
+    <input type="button" value="Depósito" class="btninter" id="dep">
 
 </div>
 
@@ -85,7 +86,7 @@
   
 
   <p class="perfilInfo">Cadastre sua Chave Pix!</p>
-  <input type="text" name="cadastraNovaChave" id="cadastraNovaChave" class="btnsperfil" placeholder="R$">
+  <input type="text" name="cadastraNovaChave" id="cadastraNovaChave" class="btnsperfil" placeholder="Chave:">
   <input type="button" value="OK" id="cadastrarPixButton" class="btnsperfil">
 </div>
 </div>
@@ -229,29 +230,27 @@
   </div>
 
 
-
-
-
-
-
-<div class="areatransf">
-<p class="transfbtn" class="errosted"> Para quem Você deseja Transferir ? </p>
-<input type="text" value="" id="caixaNome" placeholder="Nome:" class="transfbtn">
-<div id="nometed" class="errosted"></div>
-<br>
-<input type="number" name="" id="caixaCpf" placeholder="CPF:" class="transfbtn">
-<div id="cpfted" class="errosted"></div>
-<br>
-<input type="number" name="" id="caixaAgencia" placeholder="Agência:" class="transfbtn">
-<div id="agenciated" class="errosted"></div>
-<br>
-<input type="number" name="" id="caixaConta" placeholder="Conta:" class="transfbtn">
-<div id="contated" class="errosted"></div>
-<br>
-<input type="number" name="" id="caixaValor" placeholder="R$" class="transfbtn">
-<div id="valorted" class="errosted"></div>
-<input type="button" value="Transferir" id="btnted" class="transfbtn">
+  <div class="areatransf">
+    <p class="transfbtn errosted">Para quem você deseja Transferir?</p>
+    <input type="text" value="" id="caixaNome" placeholder="Nome:" class="transfbtn" required>
+    <div id="nometed" class="errosted"></div>
+    <br>
+    <input type="text" pattern="[0-9]*" name="" id="caixaCpf" placeholder="CPF:" class="transfbtn" maxlength="11" >
+    <div id="cpfted" class="errosted"></div>
+    <br>
+    <input type="text" pattern="[0-9]*" name="" id="caixaAgencia" placeholder="Agência:" class="transfbtn" maxlength="4" >
+    <div id="agenciated" class="errosted"></div>
+    <br>
+    <input type="text" pattern="[0-9]*" name="" id="caixaConta" placeholder="Conta:" class="transfbtn" maxlength="6" >
+    <div id="contated" class="errosted"></div>
+    <br>
+    <input type="number" name="" id="caixaValor" placeholder="R$" class="transfbtn" required>
+    <div id="valorted" class="errosted"></div>
+    <input type="button" value="Transferir" id="btnted" class="transfbtn">
 </div>
+
+  
+  
 
 
 <div class="areapag">
@@ -373,37 +372,9 @@
         </div>
         
       </div>
-
-
-
-
-
-
-
-      <!-- <div id="detalhes-transferencia">
-
-        <p id="descricao-transferencia"></p>
-        <p id="valor-transferencia"></p>
-        <p id="remetente-transferencia"></p>
-        <p id="destinatario-transferencia"></p>
-        <p id="data-transferencia"></p>
-        <p id="conta-origem"></p>
-        <p id="conta-destino"></p> -->
       </div>
           
 </div>
-<!-- <div class="perfil">
-    <p>Seus Dados </p>
-    <p>Nome: </p>
-    <p>E-mail: </p>
-    <p>Cpf: </p>
-    <p>Endereço: </p>
-    <p>Chaves cadastradas: </p>
-</div> -->
-
-
-
-
 </div>
 <script src="/interface/perfil.js"></script>
 <script src="/interface/saldoatt.js"></script>
@@ -451,87 +422,7 @@
   // Chame a função para buscar o saldo quando a página for carregada
   window.addEventListener('load', buscarSaldo);
 
-// Adicione um evento de clique ao botão "Transferir"
-const botaoTransferir = document.getElementById('botaotransf');
-botaoTransferir.addEventListener('click', async () => {
-  const chavePixDestino = document.getElementById('entraemail').value;
-  const valorTransferencia = parseFloat(document.getElementById('entrapix').value);
-  const emailOrigem = 'Kylers@skybank'; // AQUI É O E-MAIL DO USUARIO DE ORIGEM!!!!!!!!!
-  const saldoConta = parseFloat(document.getElementById('saldoconta').textContent);
 
-  if (!chavePixDestino || isNaN(valorTransferencia) || valorTransferencia <= 0) {
-    document.getElementById('errochave').textContent = 'Preencha os campos corretamente';
-  } else if (valorTransferencia > saldoConta) {
-    // Exibir um SweetAlert informando que o saldo é insuficiente
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Você não tem saldo para realizar essa Transferência',
-      footer: '<a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html">Está com dificuldade para Sacar? Acesse nossa Faq</a>'
-    });
-  } else {
-    // Verificar se a chave PIX de destino existe
-    const response = await fetch('/verificar-chavepix', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chavePixDestino: chavePixDestino,
-      }),
-    });
-
-    if (response.status === 200) {
-      // A chave PIX de destino existe
-
-      Swal.fire({
-        title: 'Você está prestes a finalizar sua Transferência',
-        text: 'Se os dados estiverem corretos, clique em Prosseguir para continuar com a Transferência!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Prosseguir'
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          // Realize a transferência
-          const transferenciaResponse = await fetch('/realizar-transferencia', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              chavePixDestino: chavePixDestino,
-              valorTransferencia: valorTransferencia,
-              emailOrigem: emailOrigem,
-            }),
-          });
-
-          if (transferenciaResponse.status === 201) {
-            const data = await transferenciaResponse.json();
-            const novoSaldo = data.saldo;
-
-            // Atualize o saldo na interface
-            document.getElementById('saldoconta').textContent = novoSaldo;
-            console.log('Transferência realizada com sucesso! Novo saldo:', novoSaldo);
-            document.getElementById('errochave').textContent = ' ';
-
-            // Exiba um SweetAlert de sucesso
-            Swal.fire('Obrigado por usar nosso Banco!', 'Sua Transferência foi realizada com sucesso!', 'success');
-          } else {
-            console.error('Erro ao realizar a transferência:', transferenciaResponse.statusText);
-            // Manipule o erro e exiba uma mensagem de erro ao usuário, se necessário
-          }
-        }
-      });
-    } else {
-      // A chave PIX de destino não existe, mostre uma mensagem de erro usando o SweetAlert
-      Swal.fire('Chave PIX não localizada', 'Chave PIX de destino não localizada. Digite uma chave PIX válida.', 'error');
-      document.getElementById('errochave').textContent = 'Chave PIX de destino não cadastrada.';
-    }
-  }
-});
 
 
     

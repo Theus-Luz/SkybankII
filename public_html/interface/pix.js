@@ -98,83 +98,90 @@ btnpix.addEventListener('click', function areaPix () {
 });
 
 
+// Adicione um evento de clique ao botão "Transferir"
+const botaoTransferir = document.getElementById('botaotransf');
+botaoTransferir.addEventListener('click', async () => {
+  const chavePixDestino = document.getElementById('entraemail').value;
+  const valorTransferencia = parseFloat(document.getElementById('entrapix').value);
+  const emailOrigem = 'Kylers@skybank'; // AQUI É O E-MAIL DO USUARIO DE ORIGEM!!!!!!!!!
+  const saldoConta = parseFloat(document.getElementById('saldoconta').textContent);
+
+  if (!chavePixDestino || isNaN(valorTransferencia) || valorTransferencia <= 0) {
+    document.getElementById('errochave').textContent = 'Preencha os campos corretamente';
+  } else if (valorTransferencia > saldoConta) {
+    // Exibir um SweetAlert informando que o saldo é insuficiente
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Você não tem saldo para realizar essa Transferência',
+      footer: '<a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html">Está com dificuldade para Sacar? Acesse nossa Faq</a>'
+    });
+  } else {
+    // Verificar se a chave PIX de destino existe
+    const response = await fetch('/verificar-chavepix', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chavePixDestino: chavePixDestino,
+      }),
+    });
+
+    if (response.status === 200) {
+      // A chave PIX de destino existe
+
+      Swal.fire({
+        title: 'Você está prestes a finalizar sua Transferência',
+        text: 'Se os dados estiverem corretos, clique em Prosseguir para continuar com a Transferência!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Prosseguir'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // Realize a transferência
+          const transferenciaResponse = await fetch('/realizar-transferencia', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              chavePixDestino: chavePixDestino,
+              valorTransferencia: valorTransferencia,
+              emailOrigem: emailOrigem,
+            }),
+          });
+
+          if (transferenciaResponse.status === 201) {
+            const data = await transferenciaResponse.json();
+            const novoSaldo = data.saldo;
+
+            // Atualize o saldo na interface
+            document.getElementById('saldoconta').textContent = novoSaldo;
+            console.log('Transferência realizada com sucesso! Novo saldo:', novoSaldo);
+            document.getElementById('errochave').textContent = ' ';
+
+            // Exiba um SweetAlert de sucesso
+            Swal.fire('Obrigado por usar nosso Banco!', 'Sua Transferência foi realizada com sucesso!', 'success');
+          } else {
+            console.error('Erro ao realizar a transferência:', transferenciaResponse.statusText);
+            // Manipule o erro e exiba uma mensagem de erro ao usuário, se necessário
+          }
+        }
+      });
+    } else {
+      // A chave PIX de destino não existe, mostre uma mensagem de erro usando o SweetAlert
+      Swal.fire('Chave PIX não localizada', 'Chave PIX de destino não localizada. Digite uma chave PIX válida.', 'error');
+      document.getElementById('errochave').textContent = 'Chave PIX de destino não cadastrada.';
+    }
+  }
+});
 
 
-// function confereSaldo(){
-//   var saldocontaElement = document.getElementById('saldoconta');
-//   var entrapix = document.getElementById('entrapix');
-  
-//   var saldoconta = parseFloat(saldocontaElement.innerText);
-//   var valordopix = parseFloat(entrapix.value);
 
-//   if(saldoconta > 0 && valordopix <= saldoconta ){
-
-//     Swal.fire({
-//       title: 'Você esta preste a finalizar sua Transferência',
-//     text: "Se os dados estiverem corretos, clique em Prosseguir, para Prosseguir com sua Transferência!",
-//       icon: 'warning',
-//       showCancelButton: true,
-//       confirmButtonColor: '#3085d6',
-//       cancelButtonColor: '#d33',
-//       cancelButtonText: 'Cancelar',
-//       confirmButtonText: 'Prosseguir'
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         Swal.fire(
-                    
-//           'Obrigado por usar nosso Banco!',
-//           'Sua Transferência foi realizada com sucesso!',
-//           'success')}})
-        
-  
-
-  
-//   }else {
-//     Swal.fire({
-//       icon: 'error',
-//       title: 'Oops...',
-//       text: 'Você não tem saldo para realizar essa Transferência',
-//       footer: '<a href="http://127.0.0.1:5503/Faq%20de%20ajuda/faq.html"> Esta com dificuldade para Sacar? Acesse nossa Faq</a>'
-//     })
-  
-//   }}
-
-//   function conferePix(){
-//     Swal.fire({
-//       title: 'Confirme sua Transferência',
-//       text: "Você esta presta a finalizar sua Transferência, Confirme se os dados estão corretos!",
-//       icon: 'warning',
-//       showCancelButton: true,
-//       confirmButtonColor: '#3085d6',
-//       cancelButtonColor: '#d33',
-//       confirmButtonText: 'Transferir'
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-        
-//         Swal.fire(
-                    
-//           'Obrigado por usar nosso Banco!',
-//           'Sua Transferência foi realizada com sucesso!',
-//           'success')}})
-        
-//   }
-
-
-
-// botaotransf.addEventListener('click', function(){
-//   if(entrapix.value == '' || entraemail.value == ''){
-//     if(entraemail.value == '') {errochave.innerHTML = "Entre com uma chave válida!"} else{errochave.innerHTML = ''}
-//     if(entrapix.value == '') {entrenumero.innerHTML = "Entre com um valor válido!"}else{entrenumero.innerHTML = ''}
-
-//   } else{
-   
-//         confereSaldo();
-
-       
-
-//   }
-
-// })
 
 
 

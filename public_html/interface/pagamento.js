@@ -62,3 +62,5 @@ function exibirInformacoesBoleto() {
 }
 
 // alert("Você vai pagar\n\nEmpresa: \nNome da Empresa\n\nCódigo de Barras: " + "\n" + codigo);
+
+
